@@ -44,10 +44,13 @@ def draw_elements():
 # object
 plane = SpaceCraft(0, 520, 2, 2, 10)
 bullets = list()
+bullet_recoil = 0
 
 # Gameloop
 while True:
 	clock.tick(30)
+	if bullet_recoil > 0:
+		bullet_recoil -= 1
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			sys.exit()
@@ -66,8 +69,8 @@ while True:
 		plane.x += plane.velocity
 
 	if keys[pygame.K_SPACE]:
-		if len(bullets) < 20:
+		if len(bullets) < 20 and bullet_recoil == 0:
 			bullets.append(Bullets(plane.x + 80, plane.y, 3, (255, 255, 255), 20))
-
+			bullet_recoil = 3
 
 	draw_elements()
