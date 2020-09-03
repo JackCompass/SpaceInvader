@@ -16,9 +16,12 @@ class SpaceCraft(object):
 		self.x = x
 		self.y = y
 		self.velocity = velocity
+		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
 
 	def draw(self, window):
 		window.blit(space_craft, (self.x, self.y))
+		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
+		pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
 
 class EnemySpaceCraft(object):
@@ -26,9 +29,12 @@ class EnemySpaceCraft(object):
 		self.x = x
 		self.y = y
 		self.velocity = velocity
+		self.hitarea = (self.x + 13, self.y - 10 + 20, 60, 60)
 
 	def draw(self, window):
 		window.blit(enemy_craft, (self.x, self.y))
+		self.hitarea = (self.x + 13, self.y - 10 + 20, 60, 60)
+		pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
 
 
@@ -56,6 +62,11 @@ def draw_elements():
 		bullet.draw(window)
 	
 	pygame.display.update()
+
+def ememyhit():
+	print("You Hit EnemySpaceCraft.")
+def youhit():
+	print("Enemy Hit Your SpaceCraft.")
 
 # object
 plane = SpaceCraft(0, 520, 10)
