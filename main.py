@@ -36,6 +36,9 @@ class EnemySpaceCraft(object):
 		self.hitarea = (self.x + 13, self.y - 10 + 20, 60, 60)
 		pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
+	def enemyhit(self):
+		print("You Hit EnemySpaceCraft.")
+
 
 
 class Bullets(object):
@@ -63,8 +66,7 @@ def draw_elements():
 	
 	pygame.display.update()
 
-def ememyhit():
-	print("You Hit EnemySpaceCraft.")
+
 def youhit():
 	print("Enemy Hit Your SpaceCraft.")
 
@@ -112,6 +114,13 @@ while True:
 
 	# manage the player bullet velocity and distance bullet travel.
 	for bullet in bullets:
+		for enemy in enemies:
+			if bullet.y < enemy.hitarea[1] + enemy.hitarea[3] and bullet.y > enemy.hitarea[1]:
+				if bullet.x < enemy.hitarea[0] + enemy.hitarea[2] and bullet.x > enemy.hitarea[0]:
+					enemy.enemyhit()
+					bullets.pop(bullets.index(bullet))
+					enemies.pop(enemies.index(enemy))
+
 		if bullet.y > 20:
 			bullet.y -= bullet.velocity
 		else:
