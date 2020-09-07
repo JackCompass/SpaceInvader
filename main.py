@@ -8,6 +8,8 @@ pygame.display.set_caption("Space Invader")
 space_craft = pygame.image.load('spaceship.png')
 enemy_craft = pygame.image.load('enemy1.png')
 space_background = pygame.image.load('spacebg1.jpg')
+background_music = pygame.mixer.music.load('Space.mp3')
+pygame.mixer.music.play(loops = -1)
 clock = pygame.time.Clock()
 
 
@@ -21,7 +23,10 @@ class SpaceCraft(object):
 	def draw(self, window):
 		window.blit(space_craft, (self.x, self.y))
 		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
-		pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
+		# pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
+
+	def youhit(self):
+		print("Enemy Hit Your SpaceCraft.")
 
 
 class EnemySpaceCraft(object):
@@ -34,7 +39,7 @@ class EnemySpaceCraft(object):
 	def draw(self, window):
 		window.blit(enemy_craft, (self.x, self.y))
 		self.hitarea = (self.x + 13, self.y - 10 + 20, 60, 60)
-		pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
+		# pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
 	def enemyhit(self):
 		print("You Hit EnemySpaceCraft.")
@@ -67,9 +72,6 @@ def draw_elements():
 	pygame.display.update()
 
 
-def youhit():
-	print("Enemy Hit Your SpaceCraft.")
-
 # object
 plane = SpaceCraft(0, 520, 10)
 enemies = list()
@@ -83,7 +85,7 @@ enemy_bullets = list()
 while True:
 
 	# FPS manager
-	clock.tick(30)
+	clock.tick(500)
 
 	# time delay between two enemies.
 	if enemy_generator > 0:
@@ -112,15 +114,24 @@ while True:
 		else:
 			enemy_bullets.pop(enemy_bullets.index(bullet))
 
+	# manage the hit marker by the enemy bullets.
+	for bullet in enemy_bullets:
+		if bullet.y < plane.hitarea[1] + plane.hitarea[3] and bullet.y > plane.hitarea[1]:
+			if bullet.x < plane.hitarea[0] + plane.hitarea[2] and bullet.x > plane.hitarea[0]:
+				plane.youhit()
+				enemy_bullets.pop(enemy_bullets.index(bullet))
+
+
 	# manage the player bullet velocity and distance bullet travel.
 	for bullet in bullets:
+		# checks weather the user bullet hit any enemy.
 		for enemy in enemies:
 			if bullet.y < enemy.hitarea[1] + enemy.hitarea[3] and bullet.y > enemy.hitarea[1]:
 				if bullet.x < enemy.hitarea[0] + enemy.hitarea[2] and bullet.x > enemy.hitarea[0]:
 					enemy.enemyhit()
 					bullets.pop(bullets.index(bullet))
 					enemies.pop(enemies.index(enemy))
-
+	for bullet in bullets:
 		if bullet.y > 20:
 			bullet.y -= bullet.velocity
 		else:
