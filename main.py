@@ -10,6 +10,8 @@ enemy_craft = pygame.image.load('enemy1.png')
 space_background = pygame.image.load('spacebg1.jpg')
 background_music = pygame.mixer.music.load('Space.mp3')
 pygame.mixer.music.play(loops = -1)
+bullet_sound = pygame.mixer.Sound('bullet_sound.wav')
+crash_sound = pygame.mixer.Sound('blast.wav')
 clock = pygame.time.Clock()
 
 
@@ -129,6 +131,8 @@ while True:
 			if bullet.y < enemy.hitarea[1] + enemy.hitarea[3] and bullet.y > enemy.hitarea[1]:
 				if bullet.x < enemy.hitarea[0] + enemy.hitarea[2] and bullet.x > enemy.hitarea[0]:
 					enemy.enemyhit()
+					crash_sound.play()
+					crash_sound.set_volume(0.05)
 					bullets.pop(bullets.index(bullet))
 					enemies.pop(enemies.index(enemy))
 	for bullet in bullets:
@@ -165,6 +169,8 @@ while True:
 	if keys[pygame.K_SPACE]:
 		if len(bullets) < 20 and bullet_recoil == 0:
 			bullets.append(Bullets(plane.x + 80, plane.y, 3, (255, 255, 255), 20))
+			bullet_sound.play()
+			bullet_sound.set_volume(0.05)
 			bullet_recoil = 3
 
 	draw_elements()
