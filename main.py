@@ -7,7 +7,8 @@ window = pygame.display.set_mode((500, 600))
 pygame.display.set_caption("Space Invader")
 space_craft = pygame.image.load('spaceship.png')
 enemy_craft = pygame.image.load('enemy1.png')
-space_background = pygame.image.load('spacebg1.jpg')
+space_background_1 = pygame.image.load('spacebg3.jpg')
+space_background_2 = pygame.image.load('spacebg3.jpg')
 background_music = pygame.mixer.music.load('Space.mp3')
 pygame.mixer.music.play(loops = -1)
 bullet_sound = pygame.mixer.Sound('bullet_sound.wav')
@@ -62,7 +63,8 @@ class Bullets(object):
 
 # for drawing all elements in the game.
 def draw_elements():
-	window.blit(space_background, (0, 0))
+	window.blit(space_background_1, (0, yaxis))
+	window.blit(space_background_2, (0, yaxis - 765))
 	plane.draw(window)
 	for bullet in bullets:
 		bullet.draw(window)
@@ -82,13 +84,17 @@ bullet_recoil = 0
 fps = 0
 enemy_generator = 0
 enemy_bullets = list()
+yaxis = 0
 
 # Gameloop
 while True:
 
 	# FPS manager
 	clock.tick(500)
-
+	if yaxis <= 765:
+		yaxis += 1
+	else:
+		yaxis = 0
 	# time delay between two enemies.
 	if enemy_generator > 0:
 		enemy_generator -= 1
@@ -172,5 +178,4 @@ while True:
 			bullet_sound.play()
 			bullet_sound.set_volume(0.05)
 			bullet_recoil = 3
-
 	draw_elements()
