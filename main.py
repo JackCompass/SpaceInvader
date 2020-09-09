@@ -13,6 +13,7 @@ background_music = pygame.mixer.music.load('Space.mp3')
 pygame.mixer.music.play(loops = -1)
 bullet_sound = pygame.mixer.Sound('bullet_sound.wav')
 crash_sound = pygame.mixer.Sound('blast.wav')
+font = pygame.font.SysFont("roboto", 20, bold = True, italic = True)
 clock = pygame.time.Clock()
 
 
@@ -65,6 +66,7 @@ class Bullets(object):
 def draw_elements():
 	window.blit(space_background_1, (0, yaxis))
 	window.blit(space_background_2, (0, yaxis - 765))
+	window.blit(font.render(f"Score : {score}", 1, (255, 255, 255)), (380, 10))
 	plane.draw(window)
 	for bullet in bullets:
 		bullet.draw(window)
@@ -80,10 +82,11 @@ def draw_elements():
 plane = SpaceCraft(0, 520, 10)
 enemies = list()
 bullets = list()
-bullet_recoil = 0
-fps = 0
-enemy_generator = 0
 enemy_bullets = list()
+bullet_recoil = 0
+enemy_generator = 0
+score = 0
+fps = 0
 yaxis = 0
 
 # Gameloop
@@ -91,10 +94,13 @@ while True:
 
 	# FPS manager
 	clock.tick(500)
+
+	# Monitors the infinite loop of background image.
 	if yaxis <= 765:
-		yaxis += 1
+		yaxis += 2
 	else:
 		yaxis = 0
+
 	# time delay between two enemies.
 	if enemy_generator > 0:
 		enemy_generator -= 1
@@ -137,6 +143,7 @@ while True:
 			if bullet.y < enemy.hitarea[1] + enemy.hitarea[3] and bullet.y > enemy.hitarea[1]:
 				if bullet.x < enemy.hitarea[0] + enemy.hitarea[2] and bullet.x > enemy.hitarea[0]:
 					enemy.enemyhit()
+					score += 1
 					crash_sound.play()
 					crash_sound.set_volume(0.05)
 					bullets.pop(bullets.index(bullet))
