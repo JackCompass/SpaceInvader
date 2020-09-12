@@ -10,6 +10,7 @@ pygame.display.set_icon(icon)
 space_craft = pygame.image.load('spaceship.png')
 enemy_craft = pygame.image.load('enemy1.png')
 space_background_1 = pygame.image.load('spacebg3.jpg')
+heart = pygame.image.load('life.png')
 space_background_2 = pygame.image.load('spacebg3.jpg')
 background_music = pygame.mixer.music.load('Space.mp3')
 pygame.mixer.music.play(loops = -1)
@@ -64,15 +65,27 @@ class Bullets(object):
 	def draw(self, window):
 		pygame.draw.circle(window, self.colour, (self.x, self.y), self.radius)
 
+class Life(object):
+	def __init__(self, life):
+		self.life = life
+
+	def draw(self, window):
+		if self.life != 0:
+			pos = 5
+			for x in range(0, self.life):
+				window.blit(heart, (pos, 5))
+				pos += 8
+		else :
+			window.blit(game_over.render(f"G-A-M-E O-V-E-R", 1, (0, 200, 0)), (30, 200))
+
 
 # for drawing all elements in the game.
 def draw_elements():
 	window.blit(space_background_1, (0, yaxis))
 	window.blit(space_background_2, (0, yaxis - 765))
 	window.blit(font.render(f"Score : {score}", 1, (255, 255, 255)), (380, 10))
-	if life == 0:
-		window.blit(game_over.render(f"G-A-M-E O-V-E-R", 1, (0, 200, 0)), (30, 200))
 	plane.draw(window)
+	life.draw(window)
 	for bullet in bullets:
 		bullet.draw(window)
 	for enemy in enemies:
@@ -91,7 +104,7 @@ enemy_bullets = list()
 bullet_recoil = 0
 enemy_generator = 0
 score = 0
-life = 10
+life = Life(10)
 fps = 0
 yaxis = 0
 
@@ -150,12 +163,12 @@ while True:
 		else:
 			enemy_bullets.pop(enemy_bullets.index(bullet))
 
-	if life > 0:
+	if life.life > 0:
 		# manage the hit marker by the enemy bullets.
 		for bullet in enemy_bullets:
 			if bullet.y < plane.hitarea[1] + plane.hitarea[3] and bullet.y > plane.hitarea[1]:
 				if bullet.x < plane.hitarea[0] + plane.hitarea[2] and bullet.x > plane.hitarea[0]:
-					life -= 1
+					life.life -= 1
 					enemy_bullets.pop(enemy_bullets.index(bullet))
 
 
