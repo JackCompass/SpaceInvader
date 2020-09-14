@@ -21,6 +21,7 @@ game_over = pygame.font.SysFont("roboto", 50, bold = True)
 clock = pygame.time.Clock()
 
 
+
 class SpaceCraft(object):
 	def __init__(self, x, y, velocity):
 		self.x = x
