@@ -32,7 +32,6 @@ class SpaceCraft(object):
 	def draw(self, window):
 		window.blit(space_craft, (self.x, self.y))
 		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
-		# pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
 	def youhit(self):
 		print("Enemy Hit Your SpaceCraft.")
@@ -48,7 +47,6 @@ class EnemySpaceCraft(object):
 	def draw(self, window):
 		window.blit(enemy_craft, (self.x, self.y))
 		self.hitarea = (self.x + 13, self.y - 10 + 20, 60, 60)
-		# pygame.draw.rect(window,(255, 0, 0), self.hitarea, 2)
 
 	def enemyhit(self):
 		print("You Hit EnemySpaceCraft.")
