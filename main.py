@@ -95,6 +95,7 @@ def draw_elements():
 	pygame.display.update()
 
 
+
 # Game Object Variables.
 plane = SpaceCraft(0, 520, 10)
 enemies = list()
