@@ -44,3 +44,17 @@ class Bullets:
 						utility.crash_sound.set_volume(0.05)
 						utility.bullets.pop(utility.bullets.index(bullet))
 						utility.enemies.pop(utility.enemies.index(enemy))
+
+	def recoil():
+		# Time delay between two bullets player{POV}
+		if utility.bullet_recoil > 0:
+			utility.bullet_recoil -= 1
+
+	def enemy_bullet_recoil():
+		# It manges the bullet recoil of the enemy bullet.
+		if utility.fps < 40:
+			utility.fps += 1
+			utility.bullet_stopper = False
+		else:
+			utility.fps = 0
+			utility.bullet_stopper = True

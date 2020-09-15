@@ -42,3 +42,8 @@ class EnemySpaceCraft(object):
 			if utility.enemy_generator == 0:
 				utility.enemies.append(EnemySpaceCraft(random.randint(0, 480), 0, 3))
 				utility.enemy_generator = 5
+
+	def delay():
+		# Time delay between two enemies.
+			if utility.enemy_generator > 0:
+				utility.enemy_generator -= 1

@@ -15,8 +15,15 @@ if __name__ == "__main__":
 		# Control Frame Per Second
 		utility.clock.tick(40)
 
-		# Controls enemy bullet delay, bullet recoil, and continious Background loop
-		utility.controller()
+		# Controls the Infinite loop of the background.
+		if utility.space_background_width <= 765:
+			utility.space_background_width += 2
+		else:
+			utility.space_background_width = 0
+
+		spaceship.EnemySpaceCraft.delay()
+		shooter.Bullets.recoil()
+		shooter.Bullets.enemy_bullet_recoil()
 		
 		# Manage the exit of the game
 		for event in pygame.event.get():
