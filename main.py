@@ -23,13 +23,10 @@ if __name__ == "__main__":
 		""" Key Management """
 		keys = pygame.key.get_pressed()
 
-		if keys[pygame.K_RCTRL]:
-			if utility.game_pause:
-				utility.game_pause = False
-				pygame.time.delay(100)
-			else:
-				utility.game_pause = True
-				pygame.time.delay(100)
+		if keys[pygame.K_UP]:
+			utility.game_pause = True
+		if keys[pygame.K_DOWN]:
+			utility.game_pause = False
 
 		if not utility.game_pause:
 		
