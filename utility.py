@@ -48,6 +48,5 @@ def draw_elements():
 		enemy.draw(window)
 	for bullet in enemy_bullets:
 		bullet.draw(window)
-	
 	pygame.display.update()
 
