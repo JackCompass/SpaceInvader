@@ -9,11 +9,19 @@ class SpaceCraft(object):
 		self.x = x
 		self.y = y
 		self.velocity = velocity
+		self.ship_no = 0
+		self.spaceships = ['spaceship.png', 'spaceship2.png']
 		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
 
 	def draw(self, window):
-		window.blit(utility.space_craft, (self.x, self.y))
+		space_craft = pygame.image.load(self.spaceships[self.ship_no])
+		window.blit(space_craft, (self.x, self.y))
 		self.hitarea = (self.x + 50, self.y + 20, 60, 60)
+
+	def change(self):
+		self.ship_no += 1
+		if self.ship_no > 1:
+			self.ship_no = 0
 
 class EnemySpaceCraft(object):
 	""" """

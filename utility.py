@@ -6,7 +6,6 @@ import health
 pygame.init()
 window = pygame.display.set_mode((500, 600))
 icon = pygame.image.load('icon.png')
-space_craft = pygame.image.load('spaceship.png')
 enemy_craft = pygame.image.load('enemy1.png')
 space_background_1 = pygame.image.load('spacebg3.jpg')
 space_background_2 = pygame.image.load('spacebg3.jpg')
@@ -51,5 +50,4 @@ def draw_elements():
 		bullet.draw(window)
 	
 	pygame.display.update()
-
 

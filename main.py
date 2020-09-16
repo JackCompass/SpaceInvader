@@ -38,10 +38,13 @@ if __name__ == "__main__":
 
 			if keys[pygame.K_SPACE]:
 				if len(utility.bullets) < 20 and utility.bullet_recoil == 0:
-					utility.bullets.append(shooter.Bullets(utility.plane.x + 80, utility.plane.y, 3, (255, 255, 255), 20))
+					utility.bullets.append(shooter.Bullets(utility.plane.x + 50, utility.plane.y, 3, (255, 255, 255), 20))
 					utility.bullet_sound.play()
 					utility.bullet_sound.set_volume(0.05)
 					utility.bullet_recoil = 3
+			if keys[pygame.K_LCTRL]:
+				if utility.fps == 0:
+					utility.plane.change()
 
 			# Controls the Infinite loop of the background.
 			if utility.space_background_width <= 765:
