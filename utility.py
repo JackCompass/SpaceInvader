@@ -34,6 +34,7 @@ score = 0
 fps = 0
 space_background_width = 0
 bullet_stopper = True
+game_pause = False
 
 """ It blits all the objects and their respective components."""
 def draw_elements():
@@ -51,4 +52,4 @@ def draw_elements():
 	
 	pygame.display.update()
 
-	
+

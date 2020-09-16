@@ -15,32 +15,24 @@ if __name__ == "__main__":
 		# Control Frame Per Second
 		utility.clock.tick(40)
 
-		# Controls the Infinite loop of the background.
-		if utility.space_background_width <= 765:
-			utility.space_background_width += 2
-		else:
-			utility.space_background_width = 0
-
-		spaceship.EnemySpaceCraft.delay()
-		shooter.Bullets.recoil()
-		shooter.Bullets.enemy_bullet_recoil()
-		
 		# Manage the exit of the game
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 
-		spaceship.EnemySpaceCraft.trajectory(utility.bullet_stopper)
-		spaceship.EnemySpaceCraft.total_enemies()
-		shooter.Bullets.bullet_trajectory()
-		shooter.Bullets.player_bullet_trajectory()
+		""" Key Management """
+		keys = pygame.key.get_pressed()
 
-		if utility.lives.lives > 0:
-			shooter.Bullets.bullet_hit()
-			shooter.Bullets.enemy_hit()
+		if keys[pygame.K_RCTRL]:
+			if utility.game_pause:
+				utility.game_pause = False
+				pygame.time.delay(100)
+			else:
+				utility.game_pause = True
+				pygame.time.delay(100)
 
-			""" Key Management """
-			keys = pygame.key.get_pressed()
+		if not utility.game_pause:
+		
 			if keys[pygame.K_LEFT] and utility.plane.x >= -50:
 				utility.plane.x -= utility.plane.velocity
 				
@@ -53,4 +45,23 @@ if __name__ == "__main__":
 					utility.bullet_sound.play()
 					utility.bullet_sound.set_volume(0.05)
 					utility.bullet_recoil = 3
+
+			# Controls the Infinite loop of the background.
+			if utility.space_background_width <= 765:
+				utility.space_background_width += 2
+			else:
+				utility.space_background_width = 0
+
+			spaceship.EnemySpaceCraft.total_enemies()
+			shooter.Bullets.player_bullet_trajectory()
+			spaceship.EnemySpaceCraft.trajectory(utility.bullet_stopper)
+			shooter.Bullets.enemy_bullet_recoil()
+			spaceship.EnemySpaceCraft.delay()
+			shooter.Bullets.recoil()
+			shooter.Bullets.bullet_trajectory()
+			if utility.lives.lives > 0:
+				shooter.Bullets.bullet_hit()
+				shooter.Bullets.enemy_hit()
+
+		
 		utility.draw_elements()
