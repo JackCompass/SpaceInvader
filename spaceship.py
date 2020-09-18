@@ -4,7 +4,9 @@ import random
 import shooter
 
 class SpaceCraft(object):
-	""" """
+	"""To make changes and position the user spaceship.
+		Also handles the the mechanism of different spaceship.
+	"""
 	def __init__(self, x, y, velocity):
 		self.x = x
 		self.y = y
