@@ -26,7 +26,10 @@ class SpaceCraft(object):
 			self.ship_no = 0
 
 class EnemySpaceCraft(object):
-	""" """
+	"""Handles the trajectory or motion of the enemy spaceship.
+		Mangages the bullet of the enemy ship. 
+		Controls the number of enemies at one time on the screen.
+	"""
 	def __init__(self, x, y, velocity):
 		self.x = x
 		self.y = y
