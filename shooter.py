@@ -15,14 +15,14 @@ class Bullets:
 
 	def bullet_trajectory():
 		for bullet in utility.enemy_bullets:
-			if bullet.y < 580:
+			if bullet.y < 590:
 				bullet.y += bullet.velocity
 			else:
 				utility.enemy_bullets.pop(utility.enemy_bullets.index(bullet))
 
 	def player_bullet_trajectory():
 		for bullet in utility.bullets:
-			if bullet.y > 20:
+			if bullet.y > 30:
 				bullet.y -= bullet.velocity
 			else:
 				utility.bullets.pop(utility.bullets.index(bullet))
@@ -52,7 +52,7 @@ class Bullets:
 
 	def enemy_bullet_recoil():
 		# It manges the bullet recoil of the enemy bullet.
-		if utility.fps < 40:
+		if utility.fps < 50:
 			utility.fps += 1
 			utility.bullet_stopper = False
 		else:
