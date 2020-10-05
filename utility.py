@@ -17,12 +17,12 @@ font = pygame.font.SysFont("roboto", 20, bold = True, italic = True)
 game_over = pygame.font.SysFont("roboto", 50, bold = True)
 pygame.display.set_caption("SpaceInvader")
 pygame.display.set_icon(icon)
-pygame.mixer.music.play(loops = -1)
+pygame.mixer.music.play(loops = -2)
 clock = pygame.time.Clock()
 
 
 """Variables used to control the game. """
-plane = spaceship.SpaceCraft(0, 520, 10)
+plane = spaceship.SpaceCraft(0, 510, 20)
 lives = health.Health(10)
 enemies = list()
 enemy_bullets = list()
@@ -39,7 +39,7 @@ game_pause = False
 def draw_elements():
 	window.blit(space_background_1, (0, space_background_width))
 	window.blit(space_background_2, (0, space_background_width - 765))
-	window.blit(font.render(f"score : {score}", 1, (255, 255, 255)), (380, 10))
+	window.blit(font.render(f"score : {score}", 1, (255, 255, 254)), (380, 10))
 	plane.draw(window)
 	lives.draw(window)
 	for bullet in bullets:

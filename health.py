@@ -13,4 +13,4 @@ class Health:
 				window.blit(utility.heart, (pos, 5))
 				pos += 8
 		else :
-			window.blit(utility.game_over.render(f"G-A-M-E O-V-E-R", 1, (0, 200, 0)), (30, 200))
+			window.blit(utility.game_over.render(f"G-A-M-E O-V-E-R", 1, (0, 210, 0)), (30, 210))
